@@ -1,3 +1,4 @@
+TARGET_SIGNING_KEY.txt
 tempkeyconf.properties
 # Byte-compiled / optimized / DLL files
 __pycache__/
