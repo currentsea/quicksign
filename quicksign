@@ -1,0 +1,19 @@
+#!/bin/bash
+# Filename: make_new_gpg_key_generation_properties
+# Usage: ./make_new_gpg_key_generation_properties $1 # where $1 = PASSPHRASE
+DESIRED_PRIVATEKEY_PASSPHRASE=YOURPASSPHRASEHERE
+python intro.py 
+python gencreds_aztekbtc.py $DESIRED_PRIVATEKEY_PASSPHRASE
+TARGET_USER=`cat TARGET_SIGNING_KEY.txt`
+# TARGET_USER=D5A19783
+gpg --keyserver pgp.mit.edu --recv-keys 609BE7A5 
+gpg --keyserver pgp.mit.edu --recv-keys D5A19783
+gpg -u $TARGET_USER --sign-key 609BE7A5
+gpg --keyserver pgp.mit.edu --send-key 609BE7A5
+gpg -u $TARGET_USER --sign-key D5A19783
+gpg --keyserver pgp.mit.edu --send-key D5A19783
+gpg --keyserver pgp.mit.edu --send-key $TARGET_USER
+echo "MIT KEYSERVER UPDATED WITH YOUR KEY SIGNATURES."
+echo "THANK YOU."
+
+
